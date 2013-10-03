@@ -59,6 +59,10 @@ public class Apichecker extends JFrame implements ActionListener {
     //Possible HTTP Request Options
     String httpOptions[] = {"GET", "POST", "OPTIONS", "TRACE", "PUT", "DELETE"};
     
+    /**
+     * Initializing app
+     * @param args 
+     */
     public static void main(String[] args) {
         Apichecker ac = new Apichecker();
         ac.setTitle("API Checker");
@@ -68,9 +72,7 @@ public class Apichecker extends JFrame implements ActionListener {
     }
     
     /**
-     * Initializing app and building layout
-     * 
-     * @author: Harrie Bos <polichism@gmail.com>
+     * Building layout
      */
     public Apichecker() {
         apiPanel = new JPanel();
