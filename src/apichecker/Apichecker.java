@@ -21,15 +21,7 @@ package apichecker;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import javax.swing.*;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 /**
  * @author Harrie Bos <polichism@gmail.com>
