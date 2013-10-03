@@ -140,8 +140,6 @@ public class Apichecker extends JFrame implements ActionListener {
     
     /**
      * Doing the actual call to the URL filled in urlPanel
-     * TODO: Put it in other class
-     * TODO: Fix to make other calls instead of only GET too.
      * 
      * @param ActionEvent event 
      */
