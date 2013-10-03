@@ -22,6 +22,7 @@ package apichecker;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.border.*;
 
 /**
  * @author Harrie Bos <polichism@gmail.com>
@@ -57,9 +58,12 @@ public class Apichecker extends JFrame implements ActionListener {
     public static void main(String[] args) {
         Apichecker ac = new Apichecker();
         ac.setTitle("API Checker");
-        ac.setSize(1024, 786);
         ac.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        ac.pack();
+        ac.setLocationRelativeTo ( null );
         ac.setVisible(true);
+        
     }
     
     /**
@@ -68,13 +72,15 @@ public class Apichecker extends JFrame implements ActionListener {
     public Apichecker() {
         apiPanel = new JPanel();
         apiPanel.setLayout(new BoxLayout(apiPanel, BoxLayout.Y_AXIS));
-        
+
         apiPanel.add(this.urlPanel());
         apiPanel.add(this.headerPanel());
         apiPanel.add(this.paramPanel());
         apiPanel.add(this.resultPanel());
         
-        this.add(apiPanel);  
+        this.add(apiPanel);
+        this.setLocationRelativeTo ( null );
+        this.pack();
     }
     
     /**
@@ -83,15 +89,19 @@ public class Apichecker extends JFrame implements ActionListener {
      */
     private JPanel resultPanel() {
         JPanel resultPanel = new JPanel();
+        resultPanel.setBorder(new TitledBorder ( new EtchedBorder (), "Result Area" ));
         
-        resultField = new JTextArea();
-        resultField.setSize(200, 200);
+        resultField = new JTextArea(16, 58);
+        resultField.setEditable(false);
         resultField.setToolTipText("Result");
-        resultPanel.add(resultField);
+        
+        JScrollPane scroll = new JScrollPane(resultField);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        resultPanel.add(scroll);
         
         return resultPanel;
     }
-    
+
     /**
      * The place where parameters can be added.
      * Wether this is a GET, POST or other HTTP method.
@@ -151,6 +161,7 @@ public class Apichecker extends JFrame implements ActionListener {
             
             Apicall api = new Apicall();
             String result = api.call(requestMethod, apiUrl);
+            System.out.println(result);
             resultField.setText(result);
         }
     }
