@@ -1,5 +1,6 @@
 Apichecker TODO list
 
+* Fix display return headers if wanted
 * Add function to do POST PUT DELETE OPTIONS TRACE HEAD as well
 * Add function to export result
 * Add function to lint JSON

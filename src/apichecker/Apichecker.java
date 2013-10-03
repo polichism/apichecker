@@ -31,7 +31,6 @@ import java.util.logging.Logger;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-
 /**
  * @author Harrie Bos <polichism@gmail.com>
  */
@@ -102,8 +101,8 @@ public class Apichecker extends JFrame implements ActionListener {
     }
     
     /**
-     * The place where params can be added.
-     * Wether this is a get, post or other http option
+     * The place where parameters can be added.
+     * Wether this is a GET, POST or other HTTP method.
      * 
      * @return JPanel paramPanel
      */
@@ -148,7 +147,7 @@ public class Apichecker extends JFrame implements ActionListener {
     }
     
     /**
-     * Doing the actual call to the url filled in urlPanel
+     * Doing the actual call to the URL filled in urlPanel
      * TODO: Put it in other class
      * TODO: Fix to make other calls instead of only GET too.
      * 
@@ -157,35 +156,12 @@ public class Apichecker extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == callButton) {
-            try {
-                System.out.println(this.httpOptions.toString());
-                HttpURLConnection request = null;
-                URL url;
-                url = new URL(this.urlField.getText());
-
-                request = (HttpURLConnection) url.openConnection();
-                request.setRequestMethod(this.httpOptionField.getSelectedItem()
-                       .toString());
-                request.setRequestProperty("User-Agent", "Harrie Test");
-                
-                int responseCode = request.getResponseCode();
-		System.out.println("\nSending 'GET' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
-                StringBuffer response;
-                try (BufferedReader in = new BufferedReader(
-                             new InputStreamReader(request.getInputStream()))) {
-                    String inputLine;
-                    response = new StringBuffer();
-                    while ((inputLine = in.readLine()) != null) {
-                            response.append(inputLine);
-                    }
-                }
-                resultField.setText(response.toString());
-            } catch (IOException ex) {
-                Logger.getLogger(Apichecker.class.getName())
-                      .log(Level.SEVERE, null, ex);
-            }
+            String requestMethod = this.httpOptionField.getSelectedItem().toString();
+            String apiUrl = this.urlField.getText();
             
+            Apicall api = new Apicall();
+            String result = api.call(requestMethod, apiUrl);
+            resultField.setText(result);
         }
     }
 }
